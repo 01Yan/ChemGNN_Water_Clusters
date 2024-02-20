@@ -55,10 +55,10 @@ class Config:
 
     epoch = 2000
     epoch_step = 1  # print loss every {epoch_step} epochs
-    batch_size= 1024
+    batch_size= 128
     lr = 0.0001 #tiao xiao le yg shuliangji
     seed = int(time.time())
-    weight = 10.0
+    weight = 20.0
 
 # class Config:
 #     main_path = "./"
