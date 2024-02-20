@@ -325,7 +325,7 @@ def run():
     torch.save(initial_state_dict, initial_model_state_path)
 
     optimizer = torch.optim.Adam(model.parameters(), lr=args.lr)
-    scheduler = ReduceLROnPlateau(optimizer, mode='min', factor=0.6, patience=200, min_lr=0.00001)
+    scheduler = ReduceLROnPlateau(optimizer, mode='min', factor=0.6, patience=70, min_lr=0.0000001)
 
     #opt_adam = torch.optim.Adam(model.parameters(), lr=LR, weight_decay=100.0)
     # summary(model, [(126, 4), (2, 324), (324,), (126,)])  # ((8064, 1), (2, 20736), 20736, 8064)
