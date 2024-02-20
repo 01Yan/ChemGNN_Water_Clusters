@@ -2,8 +2,9 @@
 Utilizing ChemGNN and SOAP to Predict the Properties of Water Clusters
 
 ## Getting Started
+
 ### Install Packages
+
 (1) Install main dependent packages
-'''python
-pip install -r requriements.txt
-'''
+
+'pip install -r requriements.txt'
