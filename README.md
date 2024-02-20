@@ -19,3 +19,10 @@ pip install torch-sparse==0.6.13 -f https://pytorch-geometric.com/whl/torch-1.11
 pip install torch-cluster==1.6.0 -f https://pytorch-geometric.com/whl/torch-1.11.0+cu113.html
 pip install torch-geometric
 ```
+
+### Download Datasets
+Download the processed 1-21-water data set in the following link:
+
+`https://www.dropbox.com/home/MLDATA/MLDATA/1-21-water-dataset`
+
+Unzip it, and replace the ‘dataset’ folder in the project with the obtained ‘dataset’ folder.
