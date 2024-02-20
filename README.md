@@ -26,3 +26,13 @@ Download the processed 1-21-water data set in the following link:
 `https://www.dropbox.com/home/MLDATA/MLDATA/1-21-water-dataset`
 
 Unzip it, and replace the ‘dataset’ folder in the project with the obtained ‘dataset’ folder.
+
+### Running Training
+
+(1) Run Training.
+
+`python run.py`
+
+(2) Collect the training results in `train/waterforce`
+
+(3) To repeat the experiment, only need to run it again, but the results will be overwritten in `train/waterforce`.
