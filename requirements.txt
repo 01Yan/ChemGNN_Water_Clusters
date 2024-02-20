@@ -1,8 +1,10 @@
-pip install pandas
-pip install ase
-pip install dscribe
-pip install torch-scatter==2.0.9 -f https://pytorch-geometric.com/whl/torch-1.11.0+cu113.html
-pip install torch-sparse==0.6.13 -f https://pytorch-geometric.com/whl/torch-1.11.0+cu113.html
-pip install torch-cluster==1.6.0 -f https://pytorch-geometric.com/whl/torch-1.11.0+cu113.html
-pip install torch-geometric==2.2.0
+torch==1.11
+pandas
+ase
+dscribe
+numpy
+matplotlib
+tqdm
+pandas
+jinja2
 
