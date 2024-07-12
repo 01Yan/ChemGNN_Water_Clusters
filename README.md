@@ -1,11 +1,7 @@
-ChemGNN: Chemical Environment Graph Neural Network
+PFAIMD: Potential-Free Artificial Intelligence Molecular Dynamics
 ===
 
-<p>
-  <img src="https://github.com/chenm19/ChemGNN/assets/90367338/0ebecbac-f0bb-4347-8a6c-b89e3a42277b" alt="ChemGNN_Dataset_Logo" width="100%">
-</p>
-
-Overview of Chemical Environment Graph Neural Network (ChemGNN) for optical band gap prediction of g-C3N4 nanosheet. Chemical Environment Adaptive Learning (CEAL) layers are employed to extract messages from atoms' chemical environments.
+Overview
 
 
 # Contents
@@ -25,35 +21,10 @@ Overview of Chemical Environment Graph Neural Network (ChemGNN) for optical band
 
 
 # 1. Introduction
-This study presents a novel Machine Learning Algorithm, named Chemical Environment Graph Neural Network (ChemGNN), designed to accelerate materials property prediction and advance new materials discovery. Graphitic carbon nitride (g-C3N4) and its doped variants have gained significant interest for their potential as optical materials. Accurate prediction of their band gaps is crucial for practical applications, however, traditional quantum simulation methods are computationally expensive and challenging to explore the vast space of possible doped molecular structures. The proposed ChemGNN leverages the learning ability of current graph neural networks (GNNs) to satisfactorily capture the characteristics of atoms' local chemical environment underlying complex molecular structures. Our benchmark results demonstrate more than 100% improvement in band gap prediction accuracy over existing GNNs on g-C3N4. Furthermore, the general ChemGNN model can precisely foresee band gaps of various doped g-C3N4 structures, making it a valuable tool for performing high-throughput prediction in materials design and development. 
+None
 
 # 2. Citation
-
-If you use our code or datasets from `https://github.com/EnzeXu/ChemGNN_Dataset` for academic research, please cite the following paper and the following dataset:
-
-Paper BibTeX:
-
-```
-@article{chen2023chemical,
-  title        = {Chemical Environment Adaptive Learning for Optical Band Gap Prediction of Doped Graphitic Carbon Nitride Nanosheets},
-  author       = {Chen, Chen and Xu, Enze and Yang, Defu and Yin, Haibing and Wei, Tao and Chen, Hanning and Wei, Yong and Chen, Minghan},
-  journal      = {arXiv preprint arXiv:2302.09539},
-  year         = {2023}
-}
-```
-
-Dataset BibTeX:
-
-```
-@misc{chen2023chemgnndatasets,
-  title        = {Chemical Environment Graph Neural Network (ChemGNN) Datasets},
-  author       = {Chen, Chen and Xu, Enze and Yang, Defu and Yin, Haibing and Wei, Tao and Chen, Hanning and Wei, Yong and Chen, Minghan},
-  year         = {2023},
-  howpublished = {https://github.com/EnzeXu/ChemGNN_Dataset/raw/main/ChemGNN_Dataset.zip},
-  publisher    = {GitHub},
-  version      = {1.4.1}
-}
-```
+None
 
 
 
@@ -61,24 +32,36 @@ Dataset BibTeX:
 
 
 ```
-ChemGNN
-┌── ChemGNN/
+PFAIMD
+┌── PFAIMD/
 ├────── models/
 ├────── utils/
+├────── scripts/
 ├── data/
-├── processed/
-├── config.py.example
+├────── example/
+├── dataset/
+├────── energy_dataset/
+├────── force_dataset/
+├── logs
+├── saves
+├── test
+├── config.py
 ├── LICENSE
 ├── README.md
 ├── requirements.txt
 └── run.py
 ```
 
-- `ChemGNN/models/`: folder contains the model scripts
-- `ChemGNN/utility/`: folder contains the utility scripts
-- `data/`: folder contains the raw data (the destination of the `unzip` command in section 3.1)
-- `processed/`: folder contains the processed data
-- `config.py.example`: example file of a configuration to be applied
+- `PFAIMD/models/`: folder contains the model scripts
+- `PFAIMD/utility/`: folder contains the utility scripts
+- `PFAIMD/scripts/`: folder contains the data process scripts
+- `data/example`: folder contains the example raw data from 1-H2O to 21-H2O
+- `dataset/energy_dataset/`: folder contains the processed data for the energy model
+- `dataset/force_dataset/`: folder contains the processed data for the force model
+- `logs/`: folder contains the files for logs
+-  `saves/`: folder contains saved models and training record figures.
+-  `test/`: folder contains test datasets and scripts, as well as MD scripts.
+- `config.py`: file of a configuration to be applied
 - `LICENSE`: license file
 - `README.md`: readme file
 - `requirements.txt`: main dependent packages (please follow section 3.1 to install all dependent packages)
@@ -95,7 +78,7 @@ This project is developed using Python 3.9 and is compatible with macOS, Linux, 
 (1) Clone the repository to your workspace.
 
 ```shell
-~ $ git clone https://github.com/chenm19/ChemGNN.git
+~ $ git clone 
 ```
 
 (2) Navigate into the repository.
