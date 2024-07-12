@@ -83,15 +83,15 @@ This project is developed using Python 3.9 and is compatible with macOS, Linux, 
 
 (2) Navigate into the repository.
 ```shell
-~ $ cd ChemGNN
-~/ChemGNN $
+~ $ cd PFAIMD
+~/PFAIMD $
 ```
 
 (3) Create a new virtual environment and activate it. In this case we use Virtualenv environment (Here we assume you have installed virtualenv using you source python script), you can use other virtual environments instead (like conda). This part shows how to set it on your macOS or Linux operating system.
 ```shell
-~/ChemGNN $ python -m venv ./venv/
-~/ChemGNN $ source venv/bin/activate
-(venv) ~/ChemGNN $ 
+~/PFAIMD $ python -m venv ./venv/
+~/PFAIMD $ source venv/bin/activate
+(venv) ~/PFAIMD $ 
 ```
 
 You can use the command deactivate to exit the virtual environment at any time.
@@ -100,7 +100,7 @@ You can use the command deactivate to exit the virtual environment at any time.
 
 (1) Install main dependent packages.
 ```shell
-(venv) ~/ChemGNN $ pip install -r requriements.txt
+(venv) ~/PFAIMD $ pip install -r requriements.txt
 ```
 
 (2) Install packages `torch-scatter`, `torch-sparse`, `torch-cluster` and `torch-geometric` manually corresponding to your operating systems and GPU version.
@@ -123,87 +123,69 @@ CUDA Example (If you are not using CUDA 11.3, please modify the suffix part "cuX
 
 ## 4.3 Download Datasets
 
-(1) Download our dataset ChemGNN_Dataset (The BibTeX of our dataset is listed in the introduction part). This part shows how to download and unzip it on your macOS or Linux operating system using command line. As an alternative, you can directly input the url `https://github.com/EnzeXu/ChemGNN_Dataset/raw/main/ChemGNN_Dataset.zip` into your browser to start downloading.
-```shell
-(venv) ~/ChemGNN $ wget https://github.com/EnzeXu/ChemGNN_Dataset/raw/main/ChemGNN_Dataset.zip
-```
-
-(2) Extract the datasets and ensure they are placed in the correct destination path.
-```shell
-(venv) ~/ChemGNN $ unzip -q ChemGNN_Dataset.zip -d ../
-```
-
-The Structure of the extracted folder `data/`:
-
-```
-ChemGNN
-┌── data/
-├────── GCN/
-├────────── GCN_C1P/
-├────────── GCN_C2P/
-├────────── GCN_N1C/
-├────────── GCN_N1P/
-├────────── GCN_N2C/
-├────────── GCN_N2P/
-├────────── GCN_N3C/
-├────────── GCN_N3P/
-├────────── GCN_UNDOPED/
-├────── HEPTAZINE/
-├────── WATER/
-├── ...
-└── ...
-```
 
 
 ## 4.4 Edit the Configuration File
 
-(1) Make a copy from the given example configuration file.
+(1) Edit your configuration file `config.py` (Please check the file name and place of your configuration file is correct). You can use command line tool `vim` or any other text editor.
 ```shell
-(venv) ~/ChemGNN $ cp config.py.example config.py
-```
-
-(2) Edit your configuration file `config.py` (Please check the file name and place of your configuration file is correct). You can use command line tool `vim` or any other text editor.
-```shell
-(venv) ~/ChemGNN $ vi config.py
+(venv) ~/PFAIMD $ vi config.py
 ```
 
 Given Example of the configuration file`config.py`:
 
 
 ```python
-from ChemGNN import get_config
+from PFAIMD import get_config
 
 CONFIGS = {
     'data_config': {
-        'main_path': './',  # specify the main path of the project if necessary
-        'dataset': 'GCN_C1P',  # 11 available datasets: GCN_C1P, GCN_C2P, GCN_N1C, GCN_N1P, GCN_N2C, GCN_N2P, GCN_N3C, GCN_N3P, GCN_UNDOPED, HEPTAZINE, WATER
-        'model': 'ChemGNN',  #  6 available models: ChemGNN, GAT, GCN, GraphSAGE, MPNN, PNA
+        'main_path': './',
+        'dataset': 'energy_dataset',
+        'model': 'ChemGNN_energy',
     },
     'training_config': {
-        'device_type': 'cpu',  # 'cpu' or 'gpu'. Note that only when the argument is set to 'gpu' and there are available GPU resources equipped, the training will be executed on the GPU. Otherwise, the training will use CPU.
-        'epoch': 400,  # epoch
-        'epoch_step': 5,  # minimum epoch period for printing in training
-        'batch_size': 128,  # batch_size
-        'lr': 0.001,  # learning rate
-        'seed': 0,  # random seed
-        'train_length_rate': 0.6,  # ratio of the train set with the whole dataset
-        'test_length_rate': 0.3,  # ratio of the test set with the whole dataset
+        'device_type': 'cpu',
+        'loss_fn_id': 1,
+        'epoch': 20,
+        'epoch_step': 1,
+        'batch_size': 1024,
+        'lr': 0.001,
+        'seed': 0,
+        'train_length_rate': 0.7,
+        'val_length_rate': 0.2,
     }
 }
 
-config = get_config(CONFIGS, "data/const_index.py")  # no need to modify the path here
+DATA_PROCESSED_CONFIGS = {
+    'generate_d_bt_config': {
+        'base_dir': 'example',
+        'pattern': '*WATER',
+        'H_H_cutoff': 1.6,
+        'H_O_cutoff': 2.4,
+        'O_O_cutoff': 2.8
+    },
+    'processed_dataset_config':{
+        'processed_src_path': 'data/example',
+        'processed_dst_path': 'dataset'
+    }
+}
+
+config = get_config(CONFIGS, DATA_PROCESSED_CONFIGS)
 ```
 
-At this step, you have the flexibility to make adjustments to the dataset and model type. You can refer to the comments for a list of available choices.
+At this step, you have the flexibility to make adjustments to the dataset and model type. You need to choose whether to train the energy model or the force model. 
+
+- If `'dataset': 'energy_dataset'` and `'model': 'ChemGNN_energy'`, it indicates that the energy dataset is loaded and the energy model is trained.
+- If `'dataset': 'force_dataset'` and `'model': 'ChemGNN_force'`, it indicates that the force dataset is loaded and the force model is trained.
+
 
 ## 4.5 Run Training
 
-(1) Run Training. Note that if this is the first time you choose a dataset (like `GCN_C1P` in this case), the dataset needs to be processed once. Please input `Y` or `y` to continue.
+(1) Run Training. Note that if you have downloaded our data sets and saved them in the corresponding path, you do not need to process them anymore.
 
 ```shell
-(venv) ~/ChemGNN $ python run.py
-Processed data not found in ./processed/GCN/GCN_C1P/. Do you want to start processing dataset GCN_C1P? This may take 20-40 minutes. [Y/N]Y
-... ...
+(venv) ~/PFAIMD $ python run.py
 ```
 
 (2) Collect the auto-generated training results in `saves/`.
