@@ -107,18 +107,18 @@ You can use the command deactivate to exit the virtual environment at any time.
 
 CPU Example:
 ```shell
-(venv) ~/ChemGNN $ pip install torch-scatter==2.0.9 -f https://pytorch-geometric.com/whl/torch-1.11.0+cpu.html
-(venv) ~/ChemGNN $ pip install torch-sparse==0.6.13 -f https://pytorch-geometric.com/whl/torch-1.11.0+cpu.html
-(venv) ~/ChemGNN $ pip install torch-cluster==1.6.0 -f https://pytorch-geometric.com/whl/torch-1.11.0+cpu.html
-(venv) ~/ChemGNN $ pip install torch-geometric
+(venv) ~/PFAIMD $ pip install torch-scatter==2.0.9 -f https://pytorch-geometric.com/whl/torch-1.11.0+cpu.html
+(venv) ~/PFAIMD $ pip install torch-sparse==0.6.13 -f https://pytorch-geometric.com/whl/torch-1.11.0+cpu.html
+(venv) ~/PFAIMD $ pip install torch-cluster==1.6.0 -f https://pytorch-geometric.com/whl/torch-1.11.0+cpu.html
+(venv) ~/PFAIMD $ pip install torch-geometric
 ```
 
 CUDA Example (If you are not using CUDA 11.3, please modify the suffix part "cuXXX" of each following url to match your CUDA version):
 ```shell
-(venv) ~/ChemGNN $ pip install torch-scatter==2.0.9 -f https://pytorch-geometric.com/whl/torch-1.11.0+cu113.html
-(venv) ~/ChemGNN $ pip install torch-sparse==0.6.13 -f https://pytorch-geometric.com/whl/torch-1.11.0+cu113.html
-(venv) ~/ChemGNN $ pip install torch-cluster==1.6.0 -f https://pytorch-geometric.com/whl/torch-1.11.0+cu113.html
-(venv) ~/ChemGNN $ pip install torch-geometric
+(venv) ~/PFAIMD $ pip install torch-scatter==2.0.9 -f https://pytorch-geometric.com/whl/torch-1.11.0+cu113.html
+(venv) ~/PFAIMD $ pip install torch-sparse==0.6.13 -f https://pytorch-geometric.com/whl/torch-1.11.0+cu113.html
+(venv) ~/PFAIMD $ pip install torch-cluster==1.6.0 -f https://pytorch-geometric.com/whl/torch-1.11.0+cu113.html
+(venv) ~/PFAIMD $ pip install torch-geometric
 ```
 
 ## 4.3 Download Datasets
@@ -190,19 +190,27 @@ At this step, you have the flexibility to make adjustments to the dataset and mo
 
 (2) Collect the auto-generated training results in `saves/`.
 ```shell
-(venv) ~/ChemGNN $ ls saves/YYYYMMDD_HHMMSS_f/
-all_pred_ceal_no.npy    all_true_ceal_no.npy    loss_last_half.png      loss_last_quarter.png   loss_whole.png
-model_last.pt           regression_test.png     regression_train.png    regression_val.png      test_pred.npy
-test_true.npy           val_pred.npy            val_true.npy
+(venv) ~/PFAIMD $ ls saves/YYYYMMDD_HHMMSS_f/
+loss_last_half.png      loss_last_quarter.png    loss_whole.png        model_last.pt           test_pred.npy
+test_true.npy
 ```
 
-## 4.6 Apply Your Dataset to This Model
+## 4.6 Run Testing
 
-Please write you dataset entries into `data/const_index_dic` (both `dataset_list` and `dataset` keywords) and organize your dataset following the architecture of current datasets into `data/`. Then modify the configuration file `config.py` to start training.
+(1) Run Testing. Note that we saved the trained energy and force models in test/energy.pt and test/forces.pt. Feel free to testing them.
+```shell
+(venv) ~/PFAIMD $ cd test
+(venv) ~/PFAIMD $ python mdchemgnn.py
+```
+
+If you want to test your retrained model, please rename the energy model to `'energy.pt'` and the force model to `'forces.pt'`, and replace the existing two model files.
+
+## 4.7 Apply Your Dataset to This Model
+None
 
 # 5. Questions
 
-If you have any questions, please contact xezpku@gmail.com.
+If you have any questions, please contact .
 
 
 
