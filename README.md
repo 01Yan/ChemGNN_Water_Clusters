@@ -15,7 +15,7 @@ Overview
   * [4.3 Download Datasets](#43-download-datasets)
   * [4.4 Edit the Configuration File](#44-edit-the-configuration-file)
   * [4.5 Run Training](#45-run-training)
-  * [4.6 Run Testing] (#46-run-testing)
+  * [4.6 Run Testing](#46-run-testing) 
   * [4.7 Apply Your Dataset to this Model](#47-apply-your-dataset-to-this-model)
 * [5 Questions](#5-questions)
 
