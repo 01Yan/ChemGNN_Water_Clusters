@@ -15,7 +15,8 @@ Overview
   * [4.3 Download Datasets](#43-download-datasets)
   * [4.4 Edit the Configuration File](#44-edit-the-configuration-file)
   * [4.5 Run Training](#45-run-training)
-  * [4.6 Apply Your Dataset to this Model](#46-apply-your-dataset-to-this-model)
+  * [4.6 Run Testing] (#46-run-testing)
+  * [4.7 Apply Your Dataset to this Model](#47-apply-your-dataset-to-this-model)
 * [5 Questions](#5-questions)
 
 
@@ -147,10 +148,10 @@ CONFIGS = {
     'training_config': {
         'device_type': 'cpu',
         'loss_fn_id': 1,
-        'epoch': 20,
+        'epoch': 2000,
         'epoch_step': 1,
         'batch_size': 1024,
-        'lr': 0.001,
+        'lr': 0.005,
         'seed': 0,
         'train_length_rate': 0.7,
         'val_length_rate': 0.2,
